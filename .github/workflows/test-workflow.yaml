@@ -19,5 +19,5 @@ jobs:
           result-encoding: string
           script: |
             github.rest.repos.listForOrg({
-              ${{ github.repository_owner }},
+              '${{ github.repository_owner }}',
             });
