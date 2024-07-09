@@ -13,13 +13,25 @@ jobs:
   prepare-wfs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v7
-        id: get-repos-list
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          result-encoding: string
-          script: |
-            const repos = await github.rest.repos.listForUser.paginate({
-              username: '${{ github.repository_owner }}',
-            });
-            console.log(JSON.stringify(repos))
-            
+          node-version: 20
+      - run: npm ci
+      - run: npm run prepare
+
+  tests:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-wfs
+    steps:
+      - uses: roamingowl/dwf-test_workflows/.github/workflows/tests.yaml
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-wfs
+    steps:
+      - uses: roamingowl/dwf-test_workflows/.github/workflows/tests.yaml
+
