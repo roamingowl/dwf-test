@@ -18,6 +18,6 @@ jobs:
         with:
           result-encoding: string
           script: |
-            github.rest.repos.listForOrg({
-              org: '${{ github.repository_owner }}',
+            github.rest.repos.listForUser({
+              username: '${{ github.repository_owner }}',
             });
