@@ -13,6 +13,7 @@ jobs:
   prepare-wfs:
     runs-on: ubuntu-latest
     steps:
+      - uses: ./github/actions/act_${{github.run_id}}.yaml
       - uses: actions/github-script@v7
         id: get-repos-list
         with:
