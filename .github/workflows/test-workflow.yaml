@@ -18,7 +18,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const repos = github.rest.repos.listForUser({
+            const repos = await github.rest.repos.listForUser({
               username: '${{ github.repository_owner }}',
             });
             console.log(JSON.stringify(repos))
