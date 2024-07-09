@@ -1,0 +1,22 @@
+name: Test workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      name: 
+        description: My name
+        type: string
+        required: false
+
+jobs: 
+  prepare-wfs:
+    run-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        id: get-repos-list
+        with:
+          result-encoding: string
+          script: |
+            repos.listForOrg({
+              ${{ github.repository_owner }},
+            });
